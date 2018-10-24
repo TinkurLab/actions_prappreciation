@@ -14,15 +14,31 @@ console.log("GITHUB_REF")
 console.log(process.env.GITHUB_REF)
 console.log()
 
-const testFolder = '../';
-const testFile = '../github/workflow/event.json';
 const fs = require('fs');
 
+const testFolder = '../';
 fs.readdir(testFolder, (err, files) => {
   files.forEach(file => {
     console.log(file);
   });
 })
+
+const testFolder = '../../';
+fs.readdir(testFolder, (err, files) => {
+  files.forEach(file => {
+    console.log(file);
+  });
+})
+
+const testFolder = '../workspace/';
+fs.readdir(testFolder, (err, files) => {
+  files.forEach(file => {
+    console.log(file);
+  });
+})
+
+/*
+const testFile = '../github/workflow/event.json';
 
 fs.readFile(testFile, "utf8", function(error, data) {
     if (error) {
@@ -31,3 +47,4 @@ fs.readFile(testFile, "utf8", function(error, data) {
       console.log(data);
     }
 });
+*/

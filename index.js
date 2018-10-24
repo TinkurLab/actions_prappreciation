@@ -18,13 +18,15 @@ console.log("GITHUB_EVENT_PATH")
 console.log(process.env.GITHUB_EVENT_PATH)
 console.log()
 
+/*
 const fs1 = require('fs');
 const testFolder1 = '../github/workflow/';
-fs1.readdir(testFolder3, (err, files) => {
+fs1.readdir(testFolder1, (err, files) => {
   files.forEach(file => {
     console.log(file);
   });
 })
+*/
 
 const fs2 = require('fs');
 const testFile1 = '../github/workflow/event.json';

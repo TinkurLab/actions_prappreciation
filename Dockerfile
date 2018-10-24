@@ -19,4 +19,6 @@ RUN chmod +x /github/workspace/entrypoint.sh
 
 WORKDIR /github/workspace
 
+RUN ls
+
 ENTRYPOINT ["/github/workspace/entrypoint.sh"]

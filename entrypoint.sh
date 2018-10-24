@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo starting bash
+echo "starting bash..."
 
 npm install
 

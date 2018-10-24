@@ -19,7 +19,7 @@ console.log(process.env.GITHUB_EVENT_PATH)
 console.log()
 
 const fs3 = require('fs');
-const testFolder3 = '../workspace/';
+const testFolder3 = '../github/workflow/';
 fs3.readdir(testFolder3, (err, files) => {
   files.forEach(file => {
     console.log(file);

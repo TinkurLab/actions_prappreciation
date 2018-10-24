@@ -7,6 +7,7 @@ const slicePos = ownerAndRepo.indexOf("/");
 const owner = ownerAndRepo.slice(0, slicePos);
 const repo = ownerAndRepo.slice(slicePos + 1, ownerAndRepo.length);
 
+/*
 const fs = require('fs')
 const filePath = '../github/workflow/event.json';
 fs.readFile(filePath, "utf8", function(error, data) {
@@ -16,6 +17,21 @@ fs.readFile(filePath, "utf8", function(error, data) {
         console.log(data)
     }
 });
+*/
+
+
+function readFilePromise(filename) {
+    return new Promise((resolve, reject) => {
+      fs.readFile(filename, 'utf8', (err, data) => {
+        if (err) reject(err);
+        else resolve(data);
+      })
+    })
+  }
+  
+readFilePromise('../github/workflow/event.json')
+    .then(data => updatePRTitle(event))
+    .catch(e => console.log(e))
 
 function updatePRTitle(event) {
 

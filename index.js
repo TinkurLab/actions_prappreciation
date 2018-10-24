@@ -19,17 +19,15 @@ function readFilePromise(filename) {
     })
   }
   
-readFilePromise('../github/workflow/event.json')
-    .then(data => console.log(data))
-    .then(data => updatePRTitle(data))
-    .catch(e => console.log(e))
 
-function updatePRTitle(data) {
+async function updatePRTitle() {
 
-    console.log(data.title)
-    console.log(data.number)
+    eventData = await readFilePromise('../github/workflow/event.json')
 
-    const prNumber = data.number
+    console.log(eventData.title)
+    console.log(eventData.number)
+
+    const prNumber = eventData.number
 
     octokit.pullRequests.update({
         owner: owner,

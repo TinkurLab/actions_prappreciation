@@ -14,21 +14,9 @@ console.log("GITHUB_REF")
 console.log(process.env.GITHUB_REF)
 console.log()
 
-const fs1 = require('fs');
-const testFolder1 = '../';
-fs1.readdir(testFolder1, (err, files) => {
-  files.forEach(file => {
-    console.log(file);
-  });
-})
-
-const fs2 = require('fs');
-const testFolder2 = '../../';
-fs2.readdir(testFolder2, (err, files) => {
-  files.forEach(file => {
-    console.log(file);
-  });
-})
+console.log("GITHUB_EVENT_PATH")
+console.log(process.env.GITHUB_EVENT_PATH)
+console.log()
 
 const fs3 = require('fs');
 const testFolder3 = '../workspace/';

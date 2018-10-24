@@ -27,9 +27,8 @@ async function updatePRTitle() {
 
     eventData = await readFilePromise('../github/workflow/event.json')
     eventJSON = JSON.parse(eventData) 
-    console.log(eventJSON)
 
-    console.log("PR Title: " + eventJSON.title)
+    console.log("PR Title: " + eventJSON.pull_request.title)
     console.log("PR Number: " + eventJSON.number)
 
     const prNumber = eventJSON.number

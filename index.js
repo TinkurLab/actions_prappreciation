@@ -38,3 +38,5 @@ async function updatePRTitle() {
         console.log(data)
     })
 }
+
+updatePRTitle()

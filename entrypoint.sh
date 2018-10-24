@@ -4,15 +4,9 @@ echo "starting bash..."
 
 echo "current working directory is " $PWD
 
-ls
-
+cd .. 
 cd ..
-
-echo "current working directory is " $PWD
-
-ls
-
-cd ..
+cd /actions
 
 echo "current working directory is " $PWD
 

@@ -18,22 +18,20 @@ console.log("GITHUB_EVENT_PATH")
 console.log(process.env.GITHUB_EVENT_PATH)
 console.log()
 
-const fs3 = require('fs');
-const testFolder3 = '../github/workflow/';
+const fs1 = require('fs');
+const testFolder1 = '../github/workflow/';
 fs3.readdir(testFolder3, (err, files) => {
   files.forEach(file => {
     console.log(file);
   });
 })
 
-/*
-const testFile = '../github/workflow/event.json';
-
-fs.readFile(testFile, "utf8", function(error, data) {
+const fs2 = require('fs');
+const testFile1 = '../github/workflow/event.json';
+fs2.readFile(testFile1, "utf8", function(error, data) {
     if (error) {
       console.error("read error:  " + error.message);
     } else {
       console.log(data);
     }
 });
-*/

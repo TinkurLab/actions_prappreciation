@@ -1,4 +1,4 @@
-FROM node:8.12.0-slim
+FROM node:8-slim
 
 LABEL "com.github.actions.name"="PR Appreciation"
 LABEL "com.github.actions.description"="Appreciate the person who created a new PR!"

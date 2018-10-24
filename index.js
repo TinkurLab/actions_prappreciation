@@ -20,7 +20,7 @@ console.log()
 
 const fs1 = require('fs');
 const testFolder1 = '../github/workflow/';
-fs3.readdir(testFolder3, (err, files) => {
+fs1.readdir(testFolder3, (err, files) => {
   files.forEach(file => {
     console.log(file);
   });

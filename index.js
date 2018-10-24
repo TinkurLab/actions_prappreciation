@@ -1,8 +1,6 @@
-console.log("started...")
+console.log("started nodejs...")
 
 const octokit = require('@octokit/rest')()
-
-var tools = require('./github/workflow/event.json');
 
 console.log("GITHUB_ACTION")
 console.log(process.env.GITHUB_ACTION)
@@ -16,6 +14,11 @@ console.log("GITHUB_REF")
 console.log(process.env.GITHUB_REF)
 console.log()
 
-console.log("GITHUB_EVENT_PAYLOAD")
-console.log(process.env.GITHUB_EVENT_PAYLOAD)
-console.log()
+const testFolder = './';
+const fs = require('fs');
+
+fs.readdir(testFolder, (err, files) => {
+  files.forEach(file => {
+    console.log(file);
+  });
+})

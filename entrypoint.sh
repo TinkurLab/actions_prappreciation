@@ -2,7 +2,9 @@
 
 echo "starting bash..."
 
-cat event.json
+cat /github/workflow/event.json
+cat ./github/workflow/event.json
+cat ~/github/workflow/event.json
 
 export GITHUB_EVENT_PAYLOAD=$(cat event.json)
 

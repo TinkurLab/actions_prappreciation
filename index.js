@@ -23,7 +23,7 @@ fs1.readdir(testFolder1, (err, files) => {
 })
 
 const fs2 = require('fs');
-const testFolder2 = '../';
+const testFolder2 = '../../';
 fs2.readdir(testFolder2, (err, files) => {
   files.forEach(file => {
     console.log(file);
@@ -31,7 +31,7 @@ fs2.readdir(testFolder2, (err, files) => {
 })
 
 const fs3 = require('fs');
-const testFolder3 = '../';
+const testFolder3 = '../workspace/';
 fs3.readdir(testFolder3, (err, files) => {
   files.forEach(file => {
     console.log(file);

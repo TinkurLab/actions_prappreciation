@@ -13,7 +13,7 @@ fs.readFile(filePath, "utf8", function(error, data) {
     if (error) {
       console.error("read error:  " + error.message);
     } else {
-        updatePRTitle(data)
+        console.log(data)
     }
 });
 

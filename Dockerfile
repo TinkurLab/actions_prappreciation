@@ -11,12 +11,10 @@ LABEL "maintainer"="Octocat <adam@tinkurlab.com>"
 
 
 
-ADD entrypoint.sh /github/workspace/entrypoint.sh
-ADD package.json /github/workspace/package.json
-ADD index.js /github/workspace/index.js
+ADD entrypoint.sh /entrypoint.sh
+ADD package.json /package.json
+ADD index.js /index.js
 
-RUN chmod +x /github/workspace/entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-WORKDIR /github/workspace
-
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]

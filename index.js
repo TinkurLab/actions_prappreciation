@@ -7,6 +7,9 @@ const slicePos = ownerAndRepo.indexOf("/");
 const owner = ownerAndRepo.slice(0, slicePos);
 const repo = ownerAndRepo.slice(slicePos + 1, ownerAndRepo.length);
 
+console.log("Owner: " + owner)
+console.log("Repo: " + repo)
+
 
 const fs = require('fs')
 
@@ -23,11 +26,13 @@ function readFilePromise(filename) {
 async function updatePRTitle() {
 
     eventData = await readFilePromise('../github/workflow/event.json')
+    eventJSON = JSON.parse(eventData) 
+    console.log(eventJSON)
 
-    console.log(eventData.title)
-    console.log(eventData.number)
+    console.log("PR Title: " + eventJSON.title)
+    console.log("PR Number: " + eventJSON.number)
 
-    const prNumber = eventData.number
+    const prNumber = eventJSON.number
 
     octokit.pullRequests.update({
         owner: owner,

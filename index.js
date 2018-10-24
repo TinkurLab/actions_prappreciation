@@ -21,6 +21,7 @@ function readFilePromise(filename) {
   
 readFilePromise('../github/workflow/event.json')
     .then(data => console.log(data))
+    .then(data => updatePRTitle(data))
     .catch(e => console.log(e))
 
 function updatePRTitle(data) {

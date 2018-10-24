@@ -14,7 +14,7 @@ console.log("GITHUB_REF")
 console.log(process.env.GITHUB_REF)
 console.log()
 
-const testFolder = '../github/workflow/event.json';
+const testFolder = './';
 const testFile = '../github/workflow/event.json';
 const fs = require('fs');
 

@@ -9,8 +9,6 @@ LABEL "repository"="http://github.com/adamzolyak/actions-helloworld"
 LABEL "homepage"="http://www.tinkurlab.com"
 LABEL "maintainer"="Octocat <adam@tinkurlab.com>"
 
-
-
 ADD entrypoint.sh /action/entrypoint.sh
 ADD package.json /action/package.json
 ADD index.js /action/index.js

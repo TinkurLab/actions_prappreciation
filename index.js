@@ -10,20 +10,20 @@ console.log("GITHUB_SHA")
 console.log(process.env.GITHUB_SHA)
 console.log()
 
-async function readFile(filePath) {
-    const fs = require('fs');
+console.log("GITHUB_REF")
+console.log(process.env.GITHUB_REF)
+console.log()
 
-    await fs.readFile(filePath, "utf8", function(error, data) {
-        if (error) {
-        console.error("read error:  " + error.message);
-        } else {
-        return data;
-        }
-    });
+console.log("GITHUB_EVENT_PATH")
+console.log(process.env.GITHUB_EVENT_PATH)
+console.log()
 
-    return data;
-}
-
-const eventJSON = readFile('../github/workflow/event.json')
-
-console.log(eventJSON)
+const fs = require('fs');
+const filePath = '../github/workflow/event.json';
+fs.readFile(filePath, "utf8", function(error, data) {
+    if (error) {
+      console.error("read error:  " + error.message);
+    } else {
+      console.log(data);
+    }
+});

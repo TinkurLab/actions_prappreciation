@@ -13,6 +13,6 @@ ADD entrypoint.sh /github/workspace/entrypoint.sh
 ADD package.json /github/workspace/package.json
 ADD index.js /github/workspace/index.js
 
-RUN chmod +x entrypoint.sh
+RUN chmod +x /github/workspace/entrypoint.sh
 
 ENTRYPOINT ["/github/workspace/entrypoint.sh"]

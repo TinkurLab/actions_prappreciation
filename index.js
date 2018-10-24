@@ -27,7 +27,8 @@ function updatePRTitle(event) {
     octokit.pullRequests.update({
         owner: owner,
         repo: repo,
-        number: prNumber
+        number: prNumber,
+        title: "I changed your title.  Haha!"
     }).then(({ data, headers, status }) => {
         console.log(data)
     })

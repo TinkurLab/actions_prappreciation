@@ -9,10 +9,14 @@ LABEL "repository"="http://github.com/adamzolyak/actions-helloworld"
 LABEL "homepage"="http://www.tinkurlab.com"
 LABEL "maintainer"="Octocat <adam@tinkurlab.com>"
 
+
+
 ADD entrypoint.sh /github/workspace/entrypoint.sh
 ADD package.json /github/workspace/package.json
 ADD index.js /github/workspace/index.js
 
 RUN chmod +x /github/workspace/entrypoint.sh
+
+WORKDIR /github/workspace
 
 ENTRYPOINT ["/github/workspace/entrypoint.sh"]

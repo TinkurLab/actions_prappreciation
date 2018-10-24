@@ -6,7 +6,7 @@ echo "current working directory is " $PWD
 
 cd .. 
 cd ..
-cd /actions
+cd /action
 
 echo "current working directory is " $PWD
 

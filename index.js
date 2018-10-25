@@ -33,7 +33,7 @@ async function commentOnNewIssue() {
 
     console.log('Event Action: ' + eventAction)
 
-    if (eventJSON.eventAction === 'opened') {
+    if (eventAction === 'opened') {
         console.log("issue - opened event")
 
         octokit.issues.createComment({

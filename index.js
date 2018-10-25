@@ -2,13 +2,20 @@ console.log("started nodejs...")
 
 const octokit = require('@octokit/rest')()
 
-const ownerAndRepo = process.env.GITHUB_REPOSITORY	
-const slicePos = ownerAndRepo.indexOf("/");
-const owner = ownerAndRepo.slice(0, slicePos);
-const repo = ownerAndRepo.slice(slicePos + 1, ownerAndRepo.length);
+// token (https://github.com/settings/tokens)
+octokit.authenticate({
+    type: 'token',
+    token: process.env.GITHUB_TOKEN
+  })
 
-console.log("Owner: " + owner)
-console.log("Repo: " + repo)
+//const eventOwnerAndRepo = process.env.GITHUB_REPOSITORY	
+const eventOwnerAndRepo = "adamzolyak/actions-helloworld"
+const slicePos = eventOwnerAndRepo.indexOf("/");
+const eventOwner = eventOwnerAndRepo.slice(0, slicePos);
+const eventRepo = eventOwnerAndRepo.slice(slicePos + 1, eventOwnerAndRepo.length);
+
+console.log("Owner: " + eventOwner)
+console.log("Repo: " + eventRepo)
 
 
 const fs = require('fs')
@@ -28,19 +35,30 @@ async function updatePRTitle() {
     eventData = await readFilePromise('../github/workflow/event.json')
     eventJSON = JSON.parse(eventData) 
 
+    //const eventPRNumber = eventJSON.number
+    const eventPRNumber = "2"
+
     console.log("PR Title: " + eventJSON.pull_request.title)
-    console.log("PR Number: " + eventJSON.number)
+    console.log("PR Number: " + eventPRNumber)
 
-    const prNumber = eventJSON.number
-
+    /*
     octokit.pullRequests.update({
-        owner: owner,
-        repo: repo,
-        number: prNumber,
+        owner: eventOwner,
+        repo: eventRepo,
+        number: eventPRNumber,
         title: "I changed your title.  Haha!"
     }).then(({ data, headers, status }) => {
         console.log(data)
     })
+    */
+
+   octokit.pullRequests.get({
+    owner: eventOwner,
+    repo: eventRepo,
+    number: eventPRNumber
+}).then(({ data, headers, status }) => {
+    console.log(data)
+})
 }
 
 updatePRTitle()

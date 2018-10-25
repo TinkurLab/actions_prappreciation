@@ -8,9 +8,9 @@ octokit.authenticate({
 })
 
 const eventOwnerAndRepo = process.env.GITHUB_REPOSITORY	
-const slicePos = eventOwnerAndRepo.indexOf("/");
-const eventOwner = eventOwnerAndRepo.slice(0, slicePos);
-const eventRepo = eventOwnerAndRepo.slice(slicePos + 1, eventOwnerAndRepo.length);
+const slicePos1 = eventOwnerAndRepo.indexOf("/");
+const eventOwner = eventOwnerAndRepo.slice(0, slicePos1);
+const eventRepo = eventOwnerAndRepo.slice(slicePos1 + 1, eventOwnerAndRepo.length);
 
 const fs = require('fs')
 
@@ -30,30 +30,50 @@ async function updatePRTitle() {
     eventJSON = JSON.parse(eventData) 
 
     const eventPRNumber = eventJSON.number
+    const eventPRTitle = eventJSON.pull_request.title
     const eventPRBody = eventJSON.pull_request.body
 
-    let prTotalToDos = countToDos(eventPRBody)
-    let prDoneToDos = countToDosDone(eventPRBody)
-    let prPercentToDosComplete = ((prDoneToDos / prTotalToDos).toPrecision(2) * 100) + "%"
+    const regex1 = / \[📝\d* of \d*]/g
+    let rexexResults = regex1.exec(eventPRTitle)
 
-    let newPRTitle = `📝 ${prDoneToDos} of ${prTotalToDos} tasks complete (${prPercentToDosComplete})`
+    if (rexexResults) {
+        let clearnedPRTitle = eventPRTitle.slice(0, rexexResults.index)
+        console.log("existing to dos in PR title; cleaning")
+    } else {
+        let clearnedPRTitle = eventPRTitle
+        console.log("no to dos in PR title; NOT cleaning")
+    }
 
-    octokit.pullRequests.update({
-        owner: eventOwner,
-        repo: eventRepo,
-        number: eventPRNumber,
-        title: newPRTitle
-    }).then(({ data, headers, status }) => {
-        console.log(data)
-    })
+    let clearnedPRTitle = eventPRTitle.slice(0, rexexResults.index)
+
+    const prTotalToDos = countToDos(eventPRBody)
+    const prDoneToDos = countToDosDone(eventPRBody)
+
+    if (prTotalToDos > 0) {
+        let newPRTitle = `${clearnedPRTitle} [📝 ${prDoneToDos} of ${prTotalToDos}]`
+
+        octokit.pullRequests.update({
+            owner: eventOwner,
+            repo: eventRepo,
+            number: eventPRNumber,
+            title: newPRTitle
+        }).then(({ data, headers, status }) => {
+            console.log(data)
+        })
+
+        console.log("PR title updated with to dos")
+    } else {
+        console.log("PR title NOT updated with to dos")
+    }
+    
 }
 
 function countToDos(string) {
-    var i = 0
-    var myRe = /- \[( |x)\] /g
+    let i = 0
+    const myRe = /- \[( |x)\] /g
 
-    var str = string
-    var myArray;
+    const str = string
+    let myArray;
     while ((myArray = myRe.exec(str)) !== null) {
         i++
     }
@@ -62,11 +82,11 @@ function countToDos(string) {
 }
 
 function countToDosDone(string) {
-    var i = 0
-    var myRe = /- \[x\] /g
+    let i = 0
+    const myRe = /- \[x\] /g
 
-    var str = string
-    var myArray;
+    const str = string
+    let myArray;
     while ((myArray = myRe.exec(str)) !== null) {
         i++
     }

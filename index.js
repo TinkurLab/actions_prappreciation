@@ -31,16 +31,16 @@ async function commentOnNewIssue() {
     eventAction = eventJSON.action
     eventIssueNumber = eventJSON.issue.number
 
-    console.log('Event Action: ' + eventAction)
+    console.log('event action: ' + eventAction)
 
     if (eventAction === 'opened') {
-        console.log("issue - opened event")
+        console.log("creating welcome comment on issue")
 
         octokit.issues.createComment({
           owner: eventOwner,
           repo: eventRepo,
           number: eventIssueNumber,
-          body: "🎉 Thanks for opening a new issue!  This community is successful because of it's contributors!  To help make sure your issue gets the attention it deserves, check out our [Contributing Guidelines](CONTRIBUTING.md)."
+          body: "🎉 Thanks for opening a new issue!  This community is successful because of it's contributors!  To help make sure your issue gets the attention it deserves, check out our [Contributing Guidelines](../blob/master/CONTRIBUTING.md)."
         }).then(({ data, headers, status }) => {
           // handle data
         })

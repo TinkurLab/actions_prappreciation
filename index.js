@@ -40,7 +40,7 @@ async function commentOnNewIssue() {
           owner: eventOwner,
           repo: eventRepo,
           number: eventIssueNumber,
-          body: 'Thanks for opening a new issue!'
+          body: "🎉 Thanks for opening a new issue!  This community is successful because of it's contributors!  To help make sure your issue gets the attention it deserves, check out our [Contributing Guidelines](CONTRIBUTING.md)."
         }).then(({ data, headers, status }) => {
           // handle data
         })

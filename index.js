@@ -30,17 +30,16 @@ async function updatePRTitle() {
     eventJSON = JSON.parse(eventData) 
 
     const eventPRNumber = eventJSON.number
-    const eventPRTitle = eventJSON.pull_request.title
+    let eventPRTitle = eventJSON.pull_request.title
     const eventPRBody = eventJSON.pull_request.body
 
     const regex1 = / \[📝\d* of \d*]/g
     let rexexResults = regex1.exec(eventPRTitle)
 
     if (rexexResults) {
-        let clearnedPRTitle = eventPRTitle.slice(0, rexexResults.index)
+        let eventPRTitle = eventPRTitle.slice(0, rexexResults.index)
         console.log("existing to dos in PR title; cleaning")
     } else {
-        let clearnedPRTitle = eventPRTitle
         console.log("no to dos in PR title; NOT cleaning")
     }
 
@@ -48,7 +47,7 @@ async function updatePRTitle() {
     const prDoneToDos = countToDosDone(eventPRBody)
 
     if (prTotalToDos > 0) {
-        let newPRTitle = `${clearnedPRTitle} [📝 ${prDoneToDos} of ${prTotalToDos}]`
+        let newPRTitle = `${cleanedPRTitle} [📝 ${prDoneToDos} of ${prTotalToDos}]`
 
         octokit.pullRequests.update({
             owner: eventOwner,

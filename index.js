@@ -12,20 +12,16 @@ const slicePos = eventOwnerAndRepo.indexOf("/");
 const eventOwner = eventOwnerAndRepo.slice(0, slicePos);
 const eventRepo = eventOwnerAndRepo.slice(slicePos + 1, eventOwnerAndRepo.length);
 
-console.log("Owner: " + eventOwner)
-console.log("Repo: " + eventRepo)
-
-
 const fs = require('fs')
 
 function readFilePromise(filename) {
     return new Promise((resolve, reject) => {
-      fs.readFile(filename, 'utf8', (err, data) => {
+        fs.readFile(filename, 'utf8', (err, data) => {
         if (err) reject(err);
         else resolve(data);
-      })
+        })
     })
-  }
+}
   
 
 async function updatePRTitle() {
@@ -34,18 +30,48 @@ async function updatePRTitle() {
     eventJSON = JSON.parse(eventData) 
 
     const eventPRNumber = eventJSON.number
+    const eventPRBody = eventJSON.pull_request.body
 
-    console.log("PR Title: " + eventJSON.pull_request.title)
-    console.log("PR Number: " + eventPRNumber)
+    let prTotalToDos = countToDos(eventPRBody)
+    let prDoneToDos = countToDosDone(eventPRBody)
+    let prPercentToDosComplete = ((prDoneToDos / prTotalToDos).toPrecision(2) * 100) + "%"
+
+    let newPRTitle = `📝 ${prDoneToDos} of ${prTotalToDos} tasks complete (${prPercentToDosComplete})`
 
     octokit.pullRequests.update({
         owner: eventOwner,
         repo: eventRepo,
         number: eventPRNumber,
-        title: "I changed your title.  Haha!"
+        title: newPRTitle
     }).then(({ data, headers, status }) => {
         console.log(data)
     })
+}
+
+function countToDos(string) {
+    var i = 0
+    var myRe = /- \[( |x)\] /g
+
+    var str = string
+    var myArray;
+    while ((myArray = myRe.exec(str)) !== null) {
+        i++
+    }
+
+    return i
+}
+
+function countToDosDone(string) {
+    var i = 0
+    var myRe = /- \[x\] /g
+
+    var str = string
+    var myArray;
+    while ((myArray = myRe.exec(str)) !== null) {
+        i++
+    }
+
+    return i
 }
 
 updatePRTitle()

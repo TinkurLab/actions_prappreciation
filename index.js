@@ -4,12 +4,10 @@ const octokit = require('@octokit/rest')()
 
 console.log(process.env.GITHUB_TOKEN)
 
-/*
 octokit.authenticate({
     type: 'app',
     token: process.env.GITHUB_TOKEN
 })
-*/
 
 //const eventOwnerAndRepo = process.env.GITHUB_REPOSITORY	
 const eventOwnerAndRepo = "adamzolyak/actions-helloworld"

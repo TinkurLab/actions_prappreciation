@@ -2,8 +2,6 @@ console.log("started nodejs...")
 
 const octokit = require('@octokit/rest')()
 
-console.log(process.env.GITHUB_TOKEN)
-
 octokit.authenticate({
     type: 'app',
     token: process.env.GITHUB_TOKEN

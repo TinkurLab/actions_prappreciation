@@ -44,8 +44,6 @@ async function updatePRTitle() {
         console.log("no to dos in PR title; NOT cleaning")
     }
 
-    let clearnedPRTitle = eventPRTitle.slice(0, rexexResults.index)
-
     const prTotalToDos = countToDos(eventPRBody)
     const prDoneToDos = countToDosDone(eventPRBody)
 
@@ -69,29 +67,25 @@ async function updatePRTitle() {
 }
 
 function countToDos(string) {
-    let i = 0
-    const myRe = /- \[( |x)\] /g
-
-    const str = string
-    let myArray;
-    while ((myArray = myRe.exec(str)) !== null) {
-        i++
-    }
-
-    return i
+    const regex2 = /- \[( |x)\] /g
+    let found = string.match(regex2)
+    
+    if(found) {
+        return found.length
+    } else {
+        return 0
+    }   
 }
 
 function countToDosDone(string) {
-    let i = 0
-    const myRe = /- \[x\] /g
-
-    const str = string
-    let myArray;
-    while ((myArray = myRe.exec(str)) !== null) {
-        i++
-    }
-
-    return i
+    const regex2 = /- \[x\] /g
+    let found = string.match(regex2)
+    
+    if(found) {
+        return found.length
+    } else {
+        return 0
+    }   
 }
 
 updatePRTitle()

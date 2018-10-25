@@ -31,6 +31,8 @@ async function commentOnNewIssue() {
     eventAction = eventJSON.action
     eventIssueNumber = eventJSON.issue.number
 
+    console.log('Event Action: ' + eventAction)
+
     if (eventJSON.eventAction === 'opened') {
         console.log("issue - opened event")
 
@@ -44,8 +46,6 @@ async function commentOnNewIssue() {
         })
     }
 
-
-    console.log(eventJSON)
 }
 
 commentOnNewIssue()

@@ -2,11 +2,10 @@ console.log("started nodejs...")
 
 const octokit = require('@octokit/rest')()
 
-// token (https://github.com/settings/tokens)
 octokit.authenticate({
     type: 'app',
     token: process.env.GITHUB_TOKEN
-  })
+})
 
 //const eventOwnerAndRepo = process.env.GITHUB_REPOSITORY	
 const eventOwnerAndRepo = "adamzolyak/actions-helloworld"

@@ -47,7 +47,7 @@ async function updatePRTitle() {
     const prDoneToDos = countToDosDone(eventPRBody)
 
     if (prTotalToDos > 0) {
-        let newPRTitle = `${cleanedPRTitle} [📝 ${prDoneToDos} of ${prTotalToDos}]`
+        let newPRTitle = `${eventPRTitle} [📝 ${prDoneToDos} of ${prTotalToDos}]`
 
         octokit.pullRequests.update({
             owner: eventOwner,

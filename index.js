@@ -4,7 +4,7 @@ const octokit = require('@octokit/rest')()
 
 // token (https://github.com/settings/tokens)
 octokit.authenticate({
-    type: 'token',
+    type: 'app',
     token: process.env.GITHUB_TOKEN
   })
 

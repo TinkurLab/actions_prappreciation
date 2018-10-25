@@ -28,6 +28,22 @@ async function commentOnNewIssue() {
     eventData = await readFilePromise('../github/workflow/event.json')
     eventJSON = JSON.parse(eventData) 
 
+    eventAction = eventJSON.action
+    eventIssueNumber = eventJSON.issue.number
+
+    if (eventJSON.eventAction === 'opened') {
+        console.log("issue - opened event")
+
+        octokit.issues.createComment({
+          owner: eventOwner,
+          repo: eventRepo,
+          number: eventIssueNumber,
+          body: 'Thanks for opening a new issue!'
+        }).then(({ data, headers, status }) => {
+          // handle data
+        })
+    }
+
 
     console.log(eventJSON)
 }
